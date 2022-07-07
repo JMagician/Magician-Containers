@@ -52,6 +52,8 @@ public class DemoBean {
 
 ### Aop
 
+Writing logic that requires AOP
+
 ```java
 public class DemoAop implements BaseAop {
 
@@ -68,6 +70,8 @@ public class DemoAop implements BaseAop {
     }
 }
 ```
+
+Listening to methods that need to be listened to
 
 ```java
 @MagicianBean
