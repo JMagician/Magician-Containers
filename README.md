@@ -6,7 +6,8 @@
     <img src="https://img.shields.io/badge/release-master-brightgreen.svg"/>
 </h1>
 
-Magician-Containers is 
+Magician-Containers is a container management module that allows for the unified management of beans in a project, which brings two extensions: AOP and timed tasks
+
 ## Documentation
 
 [https://magician-io.com](https://magician-io.com)
@@ -18,16 +19,16 @@ Magician-Containers is
 ```xml
 <!-- This is the jar package build by this project -->
 <dependency>
-    <groupId>com.github.yuyenews</groupId>
-    <artifactId>Magician-Web</artifactId>
-    <version>2.0.2</version>
+    <groupId>com.magician.containers</groupId>
+    <artifactId>Magician-Containers</artifactId>
+    <version>1.0.0</version>
 </dependency>
 
 <!-- This is Magician -->
 <dependency>
     <groupId>com.github.yuyenews</groupId>
     <artifactId>Magician</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.5</version>
 </dependency>
 
 <!-- This is the log package, which supports any package that can be bridged with slf4j -->
@@ -38,21 +39,77 @@ Magician-Containers is
 </dependency>
 ```
 
-### Creating core handlers
+### Specify bean
+
+Cannot be used on controllers
 
 ```java
+@MagicianBean
+public class DemoBean {
 
+}
 ```
 
-### Creating Controller
+### Aop
 
 ```java
+public class DemoAop implements BaseAop {
 
+    public void startMethod(Object[] args) {
+        
+    }
+    
+    public void endMethod(Object[] args, Object result) {
+
+    }
+    
+    public void exp(Throwable e) {
+
+    }
+}
 ```
 
+```java
+@MagicianBean
+public class DemoBean {
+
+    @MagicianAop(className = DemoAop.class)
+    public void demoAopMethod() {
+
+    }
+}
+```
+
+### Timer
+
+```java
+@MagicianBean
+public class DemoBean {
+    
+    @MagicianTimer(loop=1000)
+    public void demoTimerMethod() {
+
+    }
+}
+```
+
+### getBean
+
+```java
+DemoBean demoBean = BeanUtil.get(DemoBean.class);
+```
 
 ### Start HTTP service
 
-```java
+You must wait for the san method of the magician to execute before you can load the bean
 
+```java
+HttpServer httpServer = Magician
+        .createHttp()
+        .scan("com.test"); // Scanning range (package name)
+
+// You must wait for the san method of the magician to execute before you can load the bean
+MagicianContainers.load();
+
+httpServer.bind(8080);
 ```
