@@ -39,7 +39,7 @@ Magician-Containers is a container management module that allows for the unified
 </dependency>
 ```
 
-### Specify bean
+### Tagging beans
 
 Cannot be used on controllers
 
@@ -52,19 +52,32 @@ public class DemoBean {
 
 ### Aop
 
-Writing logic that requires AOP
+Writing the logic for AOP
 
 ```java
 public class DemoAop implements BaseAop {
 
+    /**
+     * Before method execution
+     * @param args Parameters of the method being executed
+     */
     public void startMethod(Object[] args) {
-        
+
     }
-    
+
+    /**
+     * After method execution
+     * @param args Parameters of the method being executed
+     * @param result Return data of the executed method
+     */
     public void endMethod(Object[] args, Object result) {
 
     }
-    
+
+    /**
+     * Method execution exception
+     * @param e Exception information for the executed method
+     */
     public void exp(Throwable e) {
 
     }
@@ -89,7 +102,8 @@ public class DemoBean {
 ```java
 @MagicianBean
 public class DemoBean {
-    
+
+    // loop: Rotation interval, in milliseconds
     @MagicianTimer(loop=1000)
     public void demoTimerMethod() {
 
@@ -100,19 +114,25 @@ public class DemoBean {
 ### getBean
 
 ```java
-DemoBean demoBean = BeanUtil.get(DemoBean.class);
+@MagicianBean
+public class DemoBean {
+
+    private DemoBean demoBean;
+
+    public void demoMethod() {
+        demoBean = BeanUtil.get(DemoBean.class);
+    }
+}
 ```
 
-### Start HTTP service
-
-You must wait for the san method of the magician to execute before you can load the bean
+### Load the bean at startup
 
 ```java
 HttpServer httpServer = Magician
         .createHttp()
         .scan("com.test"); // Scanning range (package name)
 
-// You must wait for the san method of the magician to execute before you can load the bean
+// The scan method must be executed before the bean can be loaded
 MagicianContainers.load();
 
 httpServer.bind(8080);
