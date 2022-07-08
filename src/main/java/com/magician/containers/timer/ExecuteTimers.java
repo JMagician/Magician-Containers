@@ -26,39 +26,41 @@ public class ExecuteTimers {
             LoadTimers.loadMarsTimers();
 
             List<TimerModel> timerModelList = TimerCacheManger.getTimerModelMap();
-            for(TimerModel timerModel : timerModelList){
-                int fixedRate = timerModel.getMagicianTimer().loop();
-                loopTimer(fixedRate,timerModel);
+            for (TimerModel timerModel : timerModelList) {
+                loopTimer(timerModel);
             }
-        } catch (Exception e){
-            logger.error("加载定时任务出错",e);
+        } catch (Exception e) {
+            logger.error("加载定时任务出错", e);
         }
     }
 
     /**
      * 定时轮询
-     * @param fixedRate 轮询间隔
+     *
      * @param timerModel 对象
      */
-    private static void loopTimer(int fixedRate, TimerModel timerModel){
+    private static void loopTimer(TimerModel timerModel) {
+        int fixedRate = timerModel.getMagicianTimer().loop();
+
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 executeTimer(timerModel);
             }
-        }, new Date(),fixedRate);
+        }, new Date(), fixedRate);
     }
 
     /**
      * 开始执行
+     *
      * @param timerMode 对象
      */
-    private static void executeTimer(TimerModel timerMode){
+    private static void executeTimer(TimerModel timerMode) {
         try {
             Object beanObject = timerMode.getObj();
             Method method = timerMode.getMethod();
             method.invoke(beanObject);
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error("执行定时任务出错,方法名:{}.{}", timerMode.getCls().getName(), timerMode.getMethod().getName(), e);
         }
     }
