@@ -21,14 +21,14 @@ Magician-Containers is a container management module that allows for the unified
 <dependency>
     <groupId>com.magician.containers</groupId>
     <artifactId>Magician-Containers</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 
 <!-- This is Magician -->
 <dependency>
     <groupId>com.github.yuyenews</groupId>
     <artifactId>Magician</artifactId>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
 </dependency>
 
 <!-- This is the log package, which supports any package that can be bridged with slf4j -->
@@ -117,23 +117,7 @@ public class DemoBean {
 @MagicianBean
 public class DemoBean {
 
-    private DemoBean demoBean;
-
-    public void demoMethod() {
-        demoBean = BeanUtil.get(DemoBean.class);
-    }
+    private DemoBean demoBean = BeanUtil.get(DemoBean.class);
+    
 }
-```
-
-### Load the bean at startup
-
-```java
-HttpServer httpServer = Magician
-        .createHttp()
-        .scan("com.test"); // Scanning range (package name)
-
-// The scan method must be executed before the bean can be loaded
-MagicianContainers.load();
-
-httpServer.bind(8080);
 ```
