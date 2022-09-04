@@ -1,11 +1,14 @@
 package com.magician.containers.bean;
 
+import com.magician.containers.MagicianContainers;
 import com.magician.containers.commons.cache.BeanCacheManager;
 
 /**
  * bean工具类
  */
 public class BeanUtil {
+
+    private static boolean isLoad = false;
 
     /**
      * 获取bean对象
@@ -14,6 +17,14 @@ public class BeanUtil {
      * @return
      */
     public static <T> T get(Class<T> tClass){
+        if(isLoad == false){
+            try {
+                MagicianContainers.load();
+            } catch (Exception e){
+            }
+        }
+        isLoad = true;
+
         return (T)BeanCacheManager.get(tClass.getName()).getObj();
     }
 
