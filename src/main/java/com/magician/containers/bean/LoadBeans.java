@@ -13,16 +13,16 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 加载bean
+ * Load beans
  */
 public class LoadBeans {
 
     private static Set<String> classList = MagicianCacheManager.getScanClassList();
 
     /**
-     * 创建Bean对象
+     * Create bean object
      *
-     * @throws Exception 异常
+     * @throws Exception
      */
     public static void loadBean() throws Exception {
         try {
@@ -43,23 +43,23 @@ public class LoadBeans {
                     beanModel.setObj(createBean(cls));
                     BeanCacheManager.add(beanName, beanModel);
                 } else {
-                    throw new Exception("已经存在name为[" + beanName + "]的bean了");
+                    throw new Exception("A bean with name [" + beanName + "] already exists");
                 }
             }
 
             /* 初始化MarsBean */
             initBean(BeanCacheManager.getBeanModelMap());
         } catch (Exception e) {
-            throw new Exception("加载并注入MarsBean的时候出现错误", e);
+            throw new Exception("Error loading and injecting MarsBean", e);
         }
     }
 
     /**
-     * 创建bean
+     * create bean
      *
-     * @param className lei
-     * @return beanObject
-     * @throws Exception 异常
+     * @param className
+     * @return
+     * @throws Exception
      */
     private static Object createBean(Class<?> className) throws Exception {
         try {
@@ -68,24 +68,24 @@ public class LoadBeans {
                 for (Method method : methods) {
                     MagicianAop marsAop = method.getAnnotation(MagicianAop.class);
                     if (marsAop != null) {
-                        /* 如果bean里面用到了AOP，就从动态代理创建对象 */
+                        /* If AOP is used in the bean, the object is created from the dynamic proxy */
                         BeanProxy marsBeanProxy = new BeanProxy();
                         return marsBeanProxy.getProxy(className);
                     }
                 }
             }
-            /* 如果bean里面没有用到AOP，就直接创建对象 */
+            /* If AOP is not used in the bean, create the object directly */
             return className.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
-            throw new Exception("创建[" + className.getName() + "]类型的bean对象出现错误", e);
+            throw new Exception("Error creating bean object of type [" + className.getName() + "]", e);
         }
     }
 
     /**
-     * 初始化Bean
+     * Initialize beans
      *
-     * @param marsBeanObjects 对象
-     * @throws Exception 异常
+     * @param marsBeanObjects
+     * @throws Exception
      */
     private static void initBean(Map<String, BeanModel> marsBeanObjects) throws Exception {
         try {
@@ -100,7 +100,7 @@ public class LoadBeans {
                 }
             }
         } catch (Exception e) {
-            throw new Exception("初始化MarsBean的时候出现错误", e);
+            throw new Exception("Error while initializing MarsBean", e);
         }
     }
 }

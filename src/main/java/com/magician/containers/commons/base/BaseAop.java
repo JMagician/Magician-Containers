@@ -1,28 +1,28 @@
 package com.magician.containers.commons.base;
 
 /**
- * AOP定义模板
+ * AOP Definition Template
  * @author yuye
  *
  */
 public interface BaseAop {
 
 	/**
-	 * 方法开始前调用
-	 * @param args 参数
+	 * Called before the method starts
+	 * @param args
 	 */
 	void startMethod(Object[] args);
 	
 	/**
-	 * 方法结束后调用
-	 * @param args 参数
-	 * @param result 被监听方法的返回值
+	 * Called after the method starts
+	 * @param args
+	 * @param result
 	 */
 	void endMethod(Object[] args, Object result);
 	
 	/**
-	 * 出异常后调用
-	 * @param e 异常
+	 * Called after an exception
+	 * @param e
 	 */
 	void exp(Throwable e);
 }

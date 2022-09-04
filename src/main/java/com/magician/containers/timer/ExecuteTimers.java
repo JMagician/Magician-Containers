@@ -12,14 +12,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * 执行定时任务
+ * Execute scheduled tasks
  */
 public class ExecuteTimers {
 
     private static Logger logger = LoggerFactory.getLogger(ExecuteTimers.class);
 
     /**
-     * 执行
+     * execute
      */
     public static void execute() {
         try {
@@ -30,14 +30,14 @@ public class ExecuteTimers {
                 loopTimer(timerModel);
             }
         } catch (Exception e) {
-            logger.error("加载定时任务出错", e);
+            logger.error("Error loading timed task", e);
         }
     }
 
     /**
-     * 定时轮询
+     * Timed polling
      *
-     * @param timerModel 对象
+     * @param timerModel
      */
     private static void loopTimer(TimerModel timerModel) {
         int fixedRate = timerModel.getMagicianTimer().loop();
@@ -51,9 +51,9 @@ public class ExecuteTimers {
     }
 
     /**
-     * 开始执行
+     * start execution
      *
-     * @param timerMode 对象
+     * @param timerMode
      */
     private static void executeTimer(TimerModel timerMode) {
         try {
@@ -61,7 +61,7 @@ public class ExecuteTimers {
             Method method = timerMode.getMethod();
             method.invoke(beanObject);
         } catch (Exception e) {
-            logger.error("执行定时任务出错,方法名:{}.{}", timerMode.getCls().getName(), timerMode.getMethod().getName(), e);
+            logger.error("Error executing timed task, method name:{}.{}", timerMode.getCls().getName(), timerMode.getMethod().getName(), e);
         }
     }
 }

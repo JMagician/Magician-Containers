@@ -1,17 +1,17 @@
 package com.magician.containers.bean.aop.model;
 
 /**
- * Aop实体
+ * Aop entity
  */
 public class AopModel {
 
     /**
-     * Aop执行的类
+     * The class that Aop executes
      */
     private Class cls;
 
     /**
-     * Aop执行的对象
+     * Object executed by Aop
      */
     private Object obj;
 

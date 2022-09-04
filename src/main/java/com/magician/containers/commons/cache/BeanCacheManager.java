@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * bean缓存管理
+ * bean cache management
  */
 public class BeanCacheManager {
 
     /**
-     * bean缓存
+     * bean cache
      */
     private static Map<String, BeanModel> beanModelMap = new ConcurrentHashMap<>();
 

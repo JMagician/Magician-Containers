@@ -10,7 +10,7 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 /**
- * 代理类
+ * proxy class
  * @author yuye
  *
  */
@@ -19,22 +19,22 @@ public class BeanProxy implements MethodInterceptor {
     private Enhancer enhancer;
 
     /**
-     * 获取代理对象
+     * get proxy object
      *
-     * @param clazz bean的class
-     * @return 对象
+     * @param clazz
+     * @return
      */
     public Object getProxy(Class<?> clazz) {
         enhancer = new Enhancer();
-        // 设置需要创建子类的类
+        // Set the class that needs to be subclassed
         enhancer.setSuperclass(clazz);
         enhancer.setCallback(this);
-        // 通过字节码技术动态创建子类实例
+        // Dynamic creation of subclass instances through bytecode technology
         return enhancer.create();
     }
 
     /**
-     * 绑定代理
+     * bind proxy
      */
     @Override
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
@@ -46,18 +46,18 @@ public class BeanProxy implements MethodInterceptor {
 
             aopModel = ExecAop.getAopModel(marsAop);
 
-            // 执行aop的开始方法
+            // Execute the start method of aop
             ExecAop.startMethod(args, aopModel);
 
-            // 执行方法本体
+            // Execute the method in the proxied class
             Object o1 = methodProxy.invokeSuper(o, args);
 
-            // 执行aop的结束方法
+            // Execute the end method of aop
             ExecAop.endMethod(args, o1, aopModel);
 
             return o1;
         } catch (Throwable e) {
-            // AOP处理异常
+            // AOP handles exceptions
             ExecAop.exp(aopModel, e);
             throw e;
         }

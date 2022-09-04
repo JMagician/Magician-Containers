@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 需要定时任务的bean以及方法缓存管理
+ * Beans and method cache management that require scheduled tasks
  */
 public class TimerCacheManger {
 
     /**
-     * 需要定时任务的bean以及方法缓存
+     * Beans and method caches that require scheduled tasks
      */
     private static List<TimerModel> timerModelMap = new ArrayList<>();
 

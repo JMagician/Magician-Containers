@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * bean工具类
+ * bean utility class
  */
 public class BeanUtil {
 
@@ -20,7 +20,7 @@ public class BeanUtil {
     }
 
     /**
-     * 获取bean对象
+     * get bean object
      * @param tClass
      * @param <T>
      * @return
@@ -32,7 +32,7 @@ public class BeanUtil {
     }
 
     /**
-     * 根据bean类名获取beanName
+     * Get beanName based on bean class name
      * @param tClass
      * @return
      */
@@ -41,7 +41,7 @@ public class BeanUtil {
     }
 
     /**
-     * 初始化
+     * initialization
      */
     private static void init(){
         try {
@@ -51,7 +51,7 @@ public class BeanUtil {
                 isLoad = true;
             }
         } catch (Exception e){
-            logger.error("加载bean出现异常", e);
+            logger.error("exception loading bean", e);
         }
     }
 }

@@ -10,32 +10,33 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * 加载定时任务
+ * Load scheduled tasks
  */
 public class LoadTimers {
 
     /**
-     * 加载所有加了MarsTimer注解的对象
-     * @throws Exception 异常
+     * Load all objects annotated with MarsTimer
+     *
+     * @throws Exception
      */
     public static void loadMarsTimers() throws Exception {
-        /* 获取所有的bean数据 */
+        /* Get all bean data */
         Map<String, BeanModel> beanModelMap = BeanCacheManager.getBeanModelMap();
 
-        for(String key : beanModelMap.keySet()) {
+        for (String key : beanModelMap.keySet()) {
             BeanModel beanModel = beanModelMap.get(key);
 
             Class<?> cls = beanModel.getCls();
             Method[] methods = cls.getDeclaredMethods();
 
-            for(Method method : methods){
+            for (Method method : methods) {
                 MagicianTimer magicianTimer = method.getAnnotation(MagicianTimer.class);
-                if(magicianTimer == null){
+                if (magicianTimer == null) {
                     continue;
                 }
 
-                if(method.getParameterCount() > 0){
-                    throw new Exception("有参数的方法不可以添加定时任务，方法名:"+cls.getName()+"."+ method.getName());
+                if (method.getParameterCount() > 0) {
+                    throw new Exception("Methods with parameters cannot add timed tasks, method name: " + cls.getName() + "." + method.getName());
                 }
 
                 TimerModel TimerModel = new TimerModel();

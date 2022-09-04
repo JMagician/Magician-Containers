@@ -5,32 +5,32 @@ import com.magician.containers.commons.annotation.MagicianTimer;
 import java.lang.reflect.Method;
 
 /**
- * 定时任务实体类
+ * Scheduled task entity class
  */
 public class TimerModel {
 
     /**
-     * method名称
+     * method name
      */
     private String methodName;
 
     /**
-     * 要执行的方法
+     * method that needs to be executed
      */
     private Method method;
 
     /**
-     * 定时任务注解
+     * Scheduled Task annotation
      */
     private MagicianTimer magicianTimer;
 
     /**
-     * bean对象
+     * bean object
      */
     private Object obj;
 
     /**
-     * class对象
+     * class
      */
     private Class<?> cls;
 

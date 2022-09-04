@@ -8,8 +8,8 @@ import java.lang.annotation.*;
 public @interface MagicianTimer {
 
     /**
-     * 循环间隔
-     * @return 间隔
+     * cycle interval
+     * @return
      */
     int loop() default 60000;
 }

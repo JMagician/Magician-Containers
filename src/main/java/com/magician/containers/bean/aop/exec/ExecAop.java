@@ -6,14 +6,14 @@ import com.magician.containers.commons.base.BaseAop;
 
 
 /**
- * 执行AOP
+ * Execute AOP
  */
 public class ExecAop {
 
     /**
-     * 方法开始前
-     * @param args 参数
-     * @param aopModel Aop实体
+     * Before the method starts
+     * @param args
+     * @param aopModel
      */
     public static void startMethod(Object[] args, AopModel aopModel) {
         if (aopModel == null) {
@@ -25,10 +25,10 @@ public class ExecAop {
     }
 
     /**
-     * 方法开始后
-     * @param args 参数
-     * @param result 参数
-     * @param aopModel 对象
+     * After the method starts
+     * @param args
+     * @param result
+     * @param aopModel
      */
     public static void endMethod(Object[] args, Object result, AopModel aopModel) {
         if (aopModel == null) {
@@ -39,9 +39,9 @@ public class ExecAop {
     }
 
     /**
-     * 异常
-     * @param aopModel 对象
-     * @param e 异常对象
+     * method execution exception
+     * @param aopModel
+     * @param e
      */
     public static void exp(AopModel aopModel, Throwable e) {
         if (aopModel == null) {
@@ -53,11 +53,11 @@ public class ExecAop {
     }
 
     /**
-     * 获取aop实体
-     * @param magicianAop aop注解
-     * @return aop实体
+     * get aop entity
+     * @param magicianAop
+     * @return
      *
-     * @throws Exception 异常
+     * @throws Exception
      */
     public static AopModel getAopModel(MagicianAop magicianAop) throws Exception {
         if(magicianAop == null) {

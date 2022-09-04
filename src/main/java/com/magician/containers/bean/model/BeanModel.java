@@ -1,19 +1,22 @@
 package com.magician.containers.bean.model;
 
+/**
+ * Bean entity
+ */
 public class BeanModel {
 
     /**
-     * bean名称
+     * bean name
      */
     private String name;
 
     /**
-     * bean对象
+     * bean object
      */
     private Object obj;
 
     /**
-     * class对象
+     * bean class
      */
     private Class<?> cls;
 

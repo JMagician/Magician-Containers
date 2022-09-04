@@ -1,12 +1,12 @@
 package com.magician.containers.commons.base;
 
 /**
- * 当需要对一个bean进行初始化的时候，实现这个接口
+ * When you need to do some initialization operations in the bean, implement this interface
  */
 public interface InitBean {
 
     /**
-     * 并实现这个方法
+     * and implement this method
      */
     void init();
 }
